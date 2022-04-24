@@ -12,7 +12,21 @@ app.use(express.static(publicDirPath));
 
 // For dynamic pages from the views folder
 app.get('', (req, res) => {
-    res.render('index');
+    res.render('index', {
+        title: 'Weather App',
+        name: 'Tom Magnum'
+    });
+});
+
+app.get('/about', (req, res) => {
+    res.render('about', {
+        title: 'About Me',
+        name: 'Rick Wright'
+    });
+});
+
+app.get('/help', (req, res) => {
+    res.render('help');
 });
 
 app.get('/weather', (req, res) => {
