@@ -2,10 +2,14 @@ const path = require('path');
 const express = require('express');
 
 const app = express();
-const publicDirPath = path.join(__dirname, '../public');
 
-// setting up handlebars for express templating engine.
-app.set('view engine', 'hbs')
+// Setting up paths for public and templates (formerly views) folders
+const publicDirPath = path.join(__dirname, '../public');
+const viewsPath = path.join(__dirname, '../templates');
+
+// Setting up handlebars for express templating engine.
+app.set('view engine', 'hbs');
+app.set('views', viewsPath);
 
 // For static pages from the public folder
 app.use(express.static(publicDirPath));
@@ -26,7 +30,9 @@ app.get('/about', (req, res) => {
 });
 
 app.get('/help', (req, res) => {
-    res.render('help');
+    res.render('help', {
+        helpText: 'This is some helping text.'
+    });
 });
 
 app.get('/weather', (req, res) => {
