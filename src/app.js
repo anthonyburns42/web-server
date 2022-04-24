@@ -1,20 +1,22 @@
 const path = require('path');
 const express = require('express');
+const hbs = require('hbs');
 
 const app = express();
 
 // Setting up paths for public and templates (formerly views) folders
+// Define paths for Express config
 const publicDirPath = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates');
 
-// Setting up handlebars for express templating engine.
+// Setting up handlebars for express templating engine and views location.
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 
-// For static pages from the public folder
+// For static pages from the public folder.
 app.use(express.static(publicDirPath));
 
-// For dynamic pages from the views folder
+// For dynamic pages from the views folder.
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather App',
