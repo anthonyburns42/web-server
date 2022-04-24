@@ -7,11 +7,13 @@ const app = express();
 // Setting up paths for public and templates (formerly views) folders
 // Define paths for Express config
 const publicDirPath = path.join(__dirname, '../public');
-const viewsPath = path.join(__dirname, '../templates');
+const viewsPath = path.join(__dirname, '../templates/views');
+const partialsPath = path.join(__dirname, '../templates/partials');
 
 // Setting up handlebars for express templating engine and views location.
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
+hbs.registerPartials(partialsPath);
 
 // For static pages from the public folder.
 app.use(express.static(publicDirPath));
@@ -33,6 +35,8 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
     res.render('help', {
+        title: 'Help',
+        name: 'TC Calvin',
         helpText: 'This is some helping text.'
     });
 });
