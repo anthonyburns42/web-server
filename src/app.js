@@ -48,6 +48,22 @@ app.get('/weather', (req, res) => {
     });
 });
 
+app.get('/help/*', (req, res) => {
+    res.render('404', {
+        title: 'Help 404',
+        name: 'Kumu Tuileta',
+        errorMsg: 'Help article not found.'
+    });
+});
+
+app.get('*', (req, res) => {
+    res.render('404', {
+        title: '404',
+        name: 'Juliet Higgins',
+        errorMsg: 'Page not found.'
+    });
+});
+
 app.listen(3000, () => {
     console.log('Server is up on port 3000');
 });
